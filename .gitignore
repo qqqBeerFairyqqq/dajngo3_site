@@ -3,3 +3,5 @@ settings.py
 venv
 db.sqlite3
 manage.py
+static/**/*.js
+static/**/*.css
