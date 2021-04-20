@@ -21,7 +21,7 @@ class MovieView(GenreYear, ListView):
     '''Вывод всех фильмов'''
     model = Movie
     queryset = Movie.objects.filter(draft=False)
-    paginate_by = 2
+    paginate_by = 6
 
 
 class MovieDetail(GenreYear, DetailView):
@@ -81,7 +81,7 @@ class AddStarRating(View):
 
 class FilterMoviesView(GenreYear ,ListView):
     '''Фильтр фильмов'''
-    paginate_by = 2
+    paginate_by = 6
 
     def get_queryset(self):
         queryset = Movie.objects.filter(
@@ -110,3 +110,16 @@ class JsonFilterMoviesView(ListView):
     def get(self, request, *args, **kwargs):
         queryset = list(self.get_queryset())
         return JsonResponse({"movies": queryset}, safe=False)
+
+
+class Search(ListView):
+    '''Плиск фильмов'''
+    paginate_by = 6
+
+    def get_queryset(self):
+        return Movie.objects.filter(title__icontains=self.request.GET.get("q"))
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["q"] = f'q={self.request.GET.get("q")}&'
+        return context
