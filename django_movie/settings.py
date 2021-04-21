@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'snowpenguin.django.recaptcha3',
 
-    'movies.apps.MoviesConfig'
+    'movies.apps.MoviesConfig',
+    'maillings.apps.MaillingsConfig',
 ]
 
 MIDDLEWARE = [
