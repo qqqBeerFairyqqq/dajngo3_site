@@ -76,7 +76,7 @@ class MovieAdmin(admin.ModelAdmin):
 			'fields': (("actors", "directors", "genres", "category"), )
 		}),
 		("Fees", {
-			'fields': (("budget", "fees_in_use", "fees_in_world"), )
+			'fields': (("budget", "fees_in_usa", "fees_in_world"), )
 		}),
 		("Options", {
 			'fields': (("url", "draft"), )
@@ -156,3 +156,4 @@ admin.site.register(RatingStar)
 admin.site.site_title = 'Django Movies'
 admin.site.site_header = 'Django Movies'
 # за место администрирования джанго, будет джанго мувис
+
