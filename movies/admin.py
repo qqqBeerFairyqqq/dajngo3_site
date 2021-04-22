@@ -3,10 +3,12 @@ from django import forms
 from movies.models import Category, Actor, Genre, Movie, MovieShots, RatingStar, Rating, Reviews
 from django.utils.safestring import mark_safe
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
+from modeltranslation.admin import TranslationAdmin
 
 
 class MovieAdminForm(forms.ModelForm):
-	description = forms.CharField(label="Описание", widget=CKEditorUploadingWidget)
+	description_ru = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
+	description_en = forms.CharField(label="Описание", widget=CKEditorUploadingWidget())
 
 	class Meta:
 		model = Movie
@@ -14,7 +16,7 @@ class MovieAdminForm(forms.ModelForm):
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslationAdmin):
 	list_display = ("id", "name", "url")
 	list_display_links = ("name", "id")
 	# какие поля будут ссылками
@@ -43,7 +45,7 @@ class MovieShotsInLine(admin.TabularInline):
 
 
 @admin.register(Movie)
-class MovieAdmin(admin.ModelAdmin):
+class MovieAdmin(TranslationAdmin):
 	list_display = ("title", "category", "url", "draft")
 	# отображение полей в листе фильмов
 	list_filter = ("category", "year")
@@ -121,12 +123,12 @@ class ReviewAdmin(admin.ModelAdmin):
 
 
 @ admin.register(Genre)
-class GenreAdmin(admin.ModelAdmin):
+class GenreAdmin(TranslationAdmin):
 	list_display = ("name", "url")
 
 
 @admin.register(Actor)
-class ActorAdmin(admin.ModelAdmin):
+class ActorAdmin(TranslationAdmin):
 	list_display = ("name", "age", "get_image")
 	readonly_fields = ("get_image", )
 
@@ -141,7 +143,7 @@ class RatingAdmin(admin.ModelAdmin):
 
 
 @admin.register(MovieShots)
-class MovieShotsAdmin(admin.ModelAdmin):
+class MovieShotsAdmin(TranslationAdmin):
 	list_display = ("title", "movie", "get_image")
 	readonly_fields = ("get_image", )
 
