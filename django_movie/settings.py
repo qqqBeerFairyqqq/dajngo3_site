@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'snowpenguin.django.recaptcha3',
+    'allauth',
+    'allauth.account',
 
     'movies.apps.MoviesConfig',
     'maillings.apps.MaillingsConfig',
@@ -95,6 +97,11 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -128,6 +135,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
 
 gettext = lambda s: s
 LANGUAGES = (
@@ -142,6 +155,7 @@ LOCALE_PATHS = (
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+
 
 STATIC_URL = '/static/'
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
