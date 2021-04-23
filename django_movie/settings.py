@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'snowpenguin.django.recaptcha3',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.vk',
 
     'movies.apps.MoviesConfig',
     'maillings.apps.MaillingsConfig',
